@@ -4,8 +4,8 @@ from dotenv import load_dotenv   #for python-dotenv method
 load_dotenv() 
 
 MAJOR = 0
-MINOR = 3
-BUGFIX = 3
+MINOR = 4
+BUGFIX = 0
 
 VERSION = "{}.{}.{}".format(MAJOR, MINOR, BUGFIX)
 

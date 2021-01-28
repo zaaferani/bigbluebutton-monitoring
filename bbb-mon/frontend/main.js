@@ -7,6 +7,19 @@ function spinner(enable) {
     }
 }
 
+function addTotalRow(totalNoUsers){
+    let markup = `<tr>
+<td></td>
+<th>total:</td>
+<th>${totalNoUsers}</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>`;
+    $("#meetings-body").append(markup);
+}
+
 function api_meetings() {
     spinner(true);
 
@@ -14,6 +27,7 @@ function api_meetings() {
         console.log("API request: /api/meetings");
         $("#meetings-body").empty();
 
+        let totalNoUsers = 0;
         data.forEach(function(element, i) {
             let mods = element.moderators.join(" | ");
 
@@ -24,6 +38,7 @@ function api_meetings() {
                 originContext = element.metadata['origin-context'];
             }
 
+            totalNoUsers += parseInt(element.noUsers);
             let markup = `<tr>
 <td>${i + 1}</td>
 <td>${element.name}</td>
@@ -34,6 +49,9 @@ function api_meetings() {
 <td>${creation.toLocaleString()}</td>
 </tr>`;
             $("#meetings-body").append(markup);
+            if (i == data.length - 1){
+                addTotalRow(totalNoUsers);
+            }
         });
         $("#text-last-refresh").html(new Date().toLocaleString());
         spinner(false);
