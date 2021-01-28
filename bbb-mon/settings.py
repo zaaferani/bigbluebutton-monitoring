@@ -1,5 +1,7 @@
 import os
 import api_lib
+from dotenv import load_dotenv   #for python-dotenv method
+load_dotenv() 
 
 MAJOR = 0
 MINOR = 3
